@@ -1,5 +1,31 @@
-// Added feature 1
-added extra feature
-Added extra comment
-Another commit added...........................
-
+pipeline{
+	agent any
+  
+	stages{
+    
+		stage( 'clone' ){
+		steps{
+			git branch:'master' ,url:'https://github.com/likhithaal/Amazon.git'
+		    }
+    }
+      
+		stage( 'clean' ){
+		steps{
+			sh 'mvn clean'
+		    }
+    }
+      
+		stage( 'test' ){
+		steps{
+			sh 'mvn test'
+		    }
+    }
+      
+		stage( 'build' ){
+		steps{
+			sh 'mvn clean install'
+		    }
+		}
+      
+	}
+}
