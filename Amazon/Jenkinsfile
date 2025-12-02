@@ -11,8 +11,7 @@ pipeline{
       
 		stage( 'clean' ){
 		steps{
-			dir ('Amazon')
-			sh 'mvn clean'
+			sh 'cd Amazon && mvn clean'
 			}
 		}
 		
