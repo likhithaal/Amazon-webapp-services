@@ -24,8 +24,14 @@ jobs:
           java-version: '11'
           distribution: 'microsoft'
 
+      # - name: Build with Maven
+        # run: mvn clean install
+
       - name: Build with Maven
-        run: mvn clean install
+        run: |
+          cd Amazon
+          mvn clean package
+          ls -la target/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -49,5 +55,7 @@ jobs:
         with:
           app-name: 'l-appservice-java'
           slot-name: 'Production'
-          package: '*.war'
+          # package: '*.war'
+          package: ./Amazon/target/*.war
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_39EF818187F64508A0FD124025EB3331 }}
+
